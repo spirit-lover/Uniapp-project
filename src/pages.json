@@ -1,0 +1,107 @@
+{
+	"pages": [
+		{
+			"path": "pages/Index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/question/QuestionIndex",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path": "pages/my/MyIndex",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path": "pages/exam/ExamIndex",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path": "pages/share/ShareIndex",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		}
+	],
+	"tabBar": {
+		"color": "#494949",
+		"selectedColor": "#8f60df",
+		"backgroundColor": "#fff",
+		"iconfontSrc": "/static/Icon/iconfont.ttf",
+		"height": "60px",
+		"borderStyle": "block",
+		"list": [{
+			"pagePath": "pages/Index",
+			"color": "#494949",
+			"text": "首页",
+			"iconfont": {
+				"text": "\ue674",
+				"selectedText": "\ue674",
+				"fontSize": "22px",
+				"color": "#494949",
+				"selectedColor": "#8f60df"
+			}
+		}, {
+			"pagePath": "pages/question/QuestionIndex",
+			"text": "八股文",
+			"iconfont": {
+				"text": "\ue622",
+				"selectedText": "\ue622",
+				"fontSize": "22px",
+				"color": "#494949",
+				"selectedColor": "#8f60df"
+			}
+		}, {
+			"pagePath": "pages/exam/ExamIndex",
+			"text": "在线考试",
+			"iconfont": {
+				"text": "\ue671",
+				"selectedText": "\ue671",
+				"fontSize": "22px",
+				"color": "#494949",
+				"selectedColor": "#8f60df"
+			}
+		}, {
+			"pagePath": "pages/share/ShareIndex",
+			"text": "经验分享",
+			"iconfont": {
+				"text": "\ue86f",
+				"selectedText": "\ue86f",
+				"fontSize": "22px",
+				"color": "#494949",
+				"selectedColor": "#8f60df"
+			}
+		}, {
+			"pagePath": "pages/my/MyIndex",
+			"text": "我的",
+			"iconfont": {
+				"text": "\ue78b",
+				"selectedText": "\ue78b",
+				"fontSize": "22px",
+				"color": "#494949",
+				"selectedColor": "#8f60df"
+			}
+		}
+
+
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"bounce": "none"
+		}
+
+	}
+}
