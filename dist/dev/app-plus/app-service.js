@@ -31,6 +31,18 @@ if (uni.restoreGlobal) {
 }
 (function(vue) {
   "use strict";
+  const ON_LAUNCH = "onLaunch";
+  function formatAppLog(type, filename, ...args) {
+    if (uni.__log__) {
+      uni.__log__(type, filename, ...args);
+    } else {
+      console[type].apply(console, [...args, filename]);
+    }
+  }
+  const createHook = (lifecycle) => (hook, target = vue.getCurrentInstance()) => {
+    !vue.isInSSRComponentSetup && vue.injectHook(lifecycle, hook, target);
+  };
+  const onLaunch = /* @__PURE__ */ createHook(ON_LAUNCH);
   const _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -38,60 +50,66 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  const _sfc_main$5 = {
-    data() {
-      return {
-        title: "easyJob"
+  const _sfc_main$6 = {
+    __name: "Index",
+    setup(__props) {
+      const carouselList = vue.ref([]);
+      const proxy = vue.getCurrentInstance().appContext.config.globalProperties;
+      const loadCarouselData = async () => {
+        let result = await proxy.Request({
+          url: "",
+          showLoading: false
+        });
+        if (!result) {
+          return;
+        }
+        carouselList.value = result.data;
       };
-    },
-    onLoad() {
-    },
-    methods: {}
+      loadCarouselData();
+      return (_ctx, _cache) => {
+        const _component_Navbar = vue.resolveComponent("Navbar");
+        return vue.openBlock(), vue.createElementBlock(
+          vue.Fragment,
+          null,
+          [
+            vue.createVNode(_component_Navbar, {
+              showLeft: false,
+              title: "easyJob"
+            }),
+            vue.createElementVNode("view", null, " 首页 ")
+          ],
+          64
+          /* STABLE_FRAGMENT */
+        );
+      };
+    }
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
-      vue.createElementVNode("view", { class: "text-area" }, [
-        vue.createElementVNode(
-          "text",
-          { class: "title" },
-          vue.toDisplayString($data.title),
-          1
-          /* TEXT */
-        )
-      ])
-    ]);
-  }
-  const PagesIndex = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "D:/软件专业/Uniapp/easyjob-app/easyjob-app/src/pages/Index.vue"]]);
-  const _sfc_main$4 = {};
+  const PagesIndex = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__file", "D:/软件专业/Uniapp/easyjob-app/src/pages/Index.vue"]]);
+  const _sfc_main$5 = {};
   function _sfc_render$3(_ctx, _cache) {
     return vue.openBlock(), vue.createElementBlock("view", null, "提问");
   }
-  const PagesQuestionQuestionIndex = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "D:/软件专业/Uniapp/easyjob-app/easyjob-app/src/pages/question/QuestionIndex.vue"]]);
-  const _sfc_main$3 = {};
+  const PagesQuestionQuestionIndex = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$3], ["__file", "D:/软件专业/Uniapp/easyjob-app/src/pages/question/QuestionIndex.vue"]]);
+  const _sfc_main$4 = {};
   function _sfc_render$2(_ctx, _cache) {
     return vue.openBlock(), vue.createElementBlock("view", null, "我的");
   }
-  const PagesMyMyIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "D:/软件专业/Uniapp/easyjob-app/easyjob-app/src/pages/my/MyIndex.vue"]]);
-  const _sfc_main$2 = {};
+  const PagesMyMyIndex = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$2], ["__file", "D:/软件专业/Uniapp/easyjob-app/src/pages/my/MyIndex.vue"]]);
+  const _sfc_main$3 = {};
   function _sfc_render$1(_ctx, _cache) {
     return vue.openBlock(), vue.createElementBlock("view", null, "考试");
   }
-  const PagesExamExamIndex = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "D:/软件专业/Uniapp/easyjob-app/easyjob-app/src/pages/exam/ExamIndex.vue"]]);
-  const _sfc_main$1 = {};
+  const PagesExamExamIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$1], ["__file", "D:/软件专业/Uniapp/easyjob-app/src/pages/exam/ExamIndex.vue"]]);
+  const _sfc_main$2 = {};
   function _sfc_render(_ctx, _cache) {
     return vue.openBlock(), vue.createElementBlock("view", null, "分享");
   }
-  const PagesShareShareIndex = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "D:/软件专业/Uniapp/easyjob-app/easyjob-app/src/pages/share/ShareIndex.vue"]]);
+  const PagesShareShareIndex = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render], ["__file", "D:/软件专业/Uniapp/easyjob-app/src/pages/share/ShareIndex.vue"]]);
   __definePage("pages/Index", PagesIndex);
   __definePage("pages/question/QuestionIndex", PagesQuestionQuestionIndex);
   __definePage("pages/my/MyIndex", PagesMyMyIndex);
   __definePage("pages/exam/ExamIndex", PagesExamExamIndex);
   __definePage("pages/share/ShareIndex", PagesShareShareIndex);
-  const ON_LAUNCH = "onLaunch";
-  const createHook = (lifecycle) => (hook, target = vue.getCurrentInstance()) => {
-    !vue.isInSSRComponentSetup && vue.injectHook(lifecycle, hook, target);
-  };
-  const onLaunch = /* @__PURE__ */ createHook(ON_LAUNCH);
   var isVue2 = false;
   function set(target, key, val) {
     if (Array.isArray(target)) {
@@ -406,8 +424,8 @@ if (uni.restoreGlobal) {
       }, 4e4);
     }
   }
-  function toastMessage(message, type) {
-    const piniaMessage = "🍍 " + message;
+  function toastMessage(message2, type) {
+    const piniaMessage = "🍍 " + message2;
     if (typeof __VUE_DEVTOOLS_TOAST__ === "function") {
       __VUE_DEVTOOLS_TOAST__(piniaMessage, type);
     } else if (type === "error") {
@@ -1566,7 +1584,7 @@ This will fail in production.`);
       }
     }
   });
-  const _sfc_main = {
+  const _sfc_main$1 = {
     __name: "App",
     setup(__props) {
       const appInfoStore = userAppInfoStore();
@@ -1596,10 +1614,202 @@ This will fail in production.`);
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "D:/软件专业/Uniapp/easyjob-app/easyjob-app/src/App.vue"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__file", "D:/软件专业/Uniapp/easyjob-app/src/App.vue"]]);
+  const message = {
+    error: (msg, callback) => {
+      uni.showToast({
+        title: msg,
+        icon: "none",
+        success: callback ? callback : null
+      });
+    },
+    success: (msg, callback) => {
+      uni.showToast({
+        title: msg,
+        icon: "success",
+        success: callback ? callback : null
+      });
+    },
+    warning: (msg, callback) => {
+      uni.showToast({
+        title: msg,
+        icon: "none",
+        success: callback ? callback : null
+      });
+    }
+  };
+  const Api = {};
+  const contentTypeForm = "";
+  const contentTypeJson = "";
+  const responseTypeJson = "json";
+  let port = uni.getSystemInfoSync().uniPlatform;
+  formatAppLog("log", "at utils/Request.js:10", port);
+  let BASE_URL = null;
+  if (port == "web") {
+    BASE_URL = "/api";
+  } else {
+    BASE_URL = Api.domain;
+  }
+  const request = (config) => {
+    const {
+      url,
+      params,
+      dataType,
+      showLoading = true,
+      showError = true,
+      errorCallback,
+      responseType = responseTypeJson
+    } = config;
+    let contentType = contentTypeForm;
+    let formData = params;
+    if (dataType != null && dataType == "json") {
+      contentType = contentTypeJson;
+    } else {
+      formData = new FormData();
+      for (let key in params) {
+        formData.append(key, params[key] == void 0 ? "" : params[key]);
+      }
+    }
+    let headers = {
+      "Content-Type": contentType,
+      "X-Requested-With": "XMLHttpRequest",
+      token: ""
+    };
+    if (params) {
+      for (let item in params) {
+        if (params[item] == void 0) {
+          params[item] = "";
+        }
+      }
+    }
+    return new Promise((resolve, reject) => {
+      if (showLoading) {
+        uni.showLoading();
+      }
+      uni.request({
+        url: BASE_URL + url,
+        data: params,
+        header: headers,
+        responseType,
+        methods: "POST"
+      }).then((res) => {
+        if (showLoading) {
+          uni.hideLoading();
+        }
+        uni.stopPullDownRefresh();
+        if (res.statusCode != 200) {
+          return Promise.reject("网络连接错误");
+        }
+        const responseData = res.data;
+        if (responseType == "arraybuffer" || responseType == "blob") {
+          resolve(responseData);
+          return;
+        }
+        if (responseData.code == 200) {
+          resolve(responseData);
+          return;
+        } else if (responseData.code == 901) {
+          uni.navigateTo({
+            url: "/pages/account/LoginAndRegister"
+          });
+          return Promise.reject();
+        } else {
+          if (errorCallback) {
+            errorCallback(responseData.info);
+          }
+          return Promise.reject(responseData.info);
+        }
+      }).catch((error) => {
+        if (error && showError) {
+          message.error(error);
+        }
+        return null;
+      });
+    });
+  };
+  const _sfc_main = {
+    __name: "NavBar",
+    props: {
+      title: {
+        type: String
+      },
+      showLeft: {
+        type: Boolean,
+        default: true
+      },
+      leftClick: {
+        type: Function
+      }
+    },
+    setup(__props) {
+      const props = __props;
+      const appInfoStore = userAppInfoStore();
+      const leftClick = () => {
+        if (props.leftClick) {
+          props.leftClick();
+        } else {
+          uni.navigateBack();
+        }
+      };
+      return (_ctx, _cache) => {
+        return vue.openBlock(), vue.createElementBlock("view", null, [
+          vue.createElementVNode(
+            "view",
+            {
+              class: "navbar",
+              style: vue.normalizeStyle({
+                height: vue.unref(appInfoStore).getInfo().navBarHeight + vue.unref(appInfoStore).getInfo().statusBar + "px",
+                "padding-top": vue.unref(appInfoStore).getInfo().statusBar + "px"
+              })
+            },
+            [
+              vue.createElementVNode("view", { class: "left" }, [
+                __props.showLeft ? (vue.openBlock(), vue.createElementBlock("view", {
+                  key: 0,
+                  class: "iconfont icon-back",
+                  onClick: leftClick
+                })) : vue.createCommentVNode("v-if", true)
+              ]),
+              vue.createElementVNode("view", { class: "content" }, [
+                __props.title ? (vue.openBlock(), vue.createElementBlock(
+                  "view",
+                  { key: 0 },
+                  vue.toDisplayString(__props.title),
+                  1
+                  /* TEXT */
+                )) : vue.createCommentVNode("v-if", true),
+                vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+              ]),
+              vue.createElementVNode("view", { class: "right" }, [
+                vue.renderSlot(_ctx.$slots, "right", {}, void 0, true)
+              ])
+            ],
+            4
+            /* STYLE */
+          ),
+          vue.createElementVNode(
+            "view",
+            {
+              style: vue.normalizeStyle({
+                height: vue.unref(appInfoStore).getInfo().navBarHeight + vue.unref(appInfoStore).getInfo().statusBar + "px",
+                "padding-top": vue.unref(appInfoStore).getInfo().statusBar + "px"
+              })
+            },
+            null,
+            4
+            /* STYLE */
+          )
+        ]);
+      };
+    }
+  };
+  const Navbar = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-7627f8a2"], ["__file", "D:/软件专业/Uniapp/easyjob-app/src/pages/components/common/NavBar.vue"]]);
   function createApp() {
     const app = vue.createVueApp(App);
     app.use(createPinia());
+    app.component("Navbar", Navbar);
+    app.config.globalProperties.Message = message;
+    app.config.globalProperties.Request = request;
     return {
       app
     };
