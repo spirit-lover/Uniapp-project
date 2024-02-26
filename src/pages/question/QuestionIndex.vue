@@ -1,9 +1,10 @@
 <script setup>
 
+import QuestionList from "./QuestionList.vue";
 </script>
 
 <template>
-<view>提问</view>
+<question-list :showLeft="false"></question-list>
 </template>
 
 <style scoped>

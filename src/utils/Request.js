@@ -7,7 +7,7 @@ const contentTypeJson = "";
 const responseTypeJson = "json";
 
 let port = uni.getSystemInfoSync().uniPlatform;
-console.log(port);
+
 let BASE_URL = null;
 if (port == "web") {
   BASE_URL = "/api";
