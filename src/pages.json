@@ -16,7 +16,8 @@
 		{
 			"path": "pages/question/QuestionIndex",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
@@ -107,6 +108,10 @@
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {
+			"pullToRefresh": {//修改下拉刷新样式颜色
+				"style": "circle",
+				"color": "#8f50df"
+			},
 			"bounce": "none"
 		}
 

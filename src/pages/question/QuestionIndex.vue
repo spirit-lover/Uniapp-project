@@ -1,6 +1,10 @@
 <script setup>
 
 import QuestionList from "./QuestionList.vue";
+import {onReachBottom} from "@dcloudio/uni-app";
+
+onReachBottom(()=>{})
+
 </script>
 
 <template>
