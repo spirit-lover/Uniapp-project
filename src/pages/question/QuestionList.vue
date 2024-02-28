@@ -46,11 +46,11 @@ const selectCategory = (category) => {
 
 <template>
   <view>
-    <navBar :showLeft="showLeft" :title="categoryInfo.categoryName">
+    <NavBar :showLeft="showLeft" :title="categoryInfo.categoryName">
       <template #right>
         <view class="iconfont icon-more-line" @click="showCategory"></view>
       </template>
-    </navBar>
+    </NavBar>
     <view>
       <view class="question-list">
         <data-list :dataSource="dataSource"
@@ -60,6 +60,7 @@ const selectCategory = (category) => {
             <question-item
                 :data="data"
                 :categoryId="categoryInfo.categoryId"
+                :show-detail="true"
             ></question-item>
           </template>
         </data-list>

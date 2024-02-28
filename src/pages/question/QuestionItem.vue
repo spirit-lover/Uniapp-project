@@ -15,11 +15,11 @@ const props = defineProps({
   }
 });
 
-const showDetailHandler=()=>{
+const showDetailHandler=(data)=>{
   if(!props.showDetail){
     return
   }
-  let url=`/pages/question/QuestionDetail`
+  let url=`/pages/question/QuestionDetail?questionId=${data.questionId}&categoryId=${props.categoryId || ""}`
   uni.navigateTo({
     url:url
   })

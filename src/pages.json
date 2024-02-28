@@ -21,6 +21,13 @@
 			}
 		},
 		{
+			"path": "pages/question/QuestionDetail",
+			"style": {
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
 			"path": "pages/my/MyIndex",
 			"style": {
 				"navigationBarTitleText": "uni-app"
